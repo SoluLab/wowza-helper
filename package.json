@@ -1,0 +1,26 @@
+{
+	"name": "wowza-helper",
+	"version": "1.0.0",
+	"description": "helper package for wowza streaming",
+	"main": "./dist/index.js",
+	"scripts": {
+		"build": "npm run remove && babel src -d dist",
+		"remove": "rimraf dist"
+	},
+	"keywords": [
+		"wowza",
+		"wowza-helper"
+	],
+	"author": "MD ASIF JAWED",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/cli": "^7.17.10",
+		"@babel/core": "^7.18.2",
+		"@babel/preset-env": "^7.18.2",
+		"rimraf": "^3.0.2"
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"crypto": "^1.0.1"
+	}
+}
