@@ -15,26 +15,14 @@ const WOWZA_ENDPOINTS = {
 
 class WowzaHelper {
 	constructor(WOWZA_API_KEY, WOWZA_ACCESS_KEY) {
-		this.GetHeaders = function (PATH) {
-			const timestamp = Math.round(new Date().getTime() / 1000);
-			const HMACData = `${timestamp}:${PATH}:${WOWZA_API_KEY}`;
-			const signature = crypto
-				.createHmac('sha256', WOWZA_API_KEY)
-				.update(HMACData)
-				.digest('hex');
-
-			return {
-				'wsc-access-key': WOWZA_ACCESS_KEY,
-				'wsc-timestamp': timestamp,
-				'wsc-signature': signature,
-				'Content-Type': 'application/json',
-			};
-		};
-
 		this.CreateLiveStream = async function (options = {}) {
 			try {
 				const path = WOWZA_ENDPOINTS.CreateLiveStream;
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const {
 					name = this.GenerateRandomStringOfLength(20),
@@ -70,7 +58,11 @@ class WowzaHelper {
 		this.UpdateLiveStream = async function (options = {}) {
 			try {
 				const path = WOWZA_ENDPOINTS.CreateLiveStream;
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				if (!Object.keys(options).length) {
 					throw 'No data provided to update!';
@@ -93,7 +85,11 @@ class WowzaHelper {
 		this.GetAllLiveStream = async function () {
 			try {
 				const path = WOWZA_ENDPOINTS.GetAllLiveStream;
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.get(WOWZA_BASE_URL + path, {
 					headers,
@@ -111,7 +107,11 @@ class WowzaHelper {
 					'<streamId>',
 					LIVE_STREAM_ID
 				);
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.get(WOWZA_BASE_URL + path, {
 					headers,
@@ -129,7 +129,11 @@ class WowzaHelper {
 					'<streamId>',
 					LIVE_STREAM_ID
 				);
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.get(WOWZA_BASE_URL + path, {
 					headers,
@@ -147,7 +151,11 @@ class WowzaHelper {
 					'<streamId>',
 					LIVE_STREAM_ID
 				);
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.put(WOWZA_BASE_URL + path, {
 					headers,
@@ -165,7 +173,11 @@ class WowzaHelper {
 					'<streamId>',
 					LIVE_STREAM_ID
 				);
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.put(WOWZA_BASE_URL + path, {
 					headers,
@@ -183,7 +195,11 @@ class WowzaHelper {
 					'<streamId>',
 					LIVE_STREAM_ID
 				);
-				const headers = this.GetHeaders(path);
+				const headers = this.GetHeaders(
+					path,
+					WOWZA_API_KEY,
+					WOWZA_ACCESS_KEY
+				);
 
 				const request = await axios.get(WOWZA_BASE_URL + path, {
 					headers,
@@ -205,6 +221,22 @@ class WowzaHelper {
 			);
 		}
 		return result;
+	}
+
+	GetHeaders(PATH, WOWZA_API_KEY, WOWZA_ACCESS_KEY) {
+		const timestamp = Math.round(new Date().getTime() / 1000);
+		const HMACData = `${timestamp}:${PATH}:${WOWZA_API_KEY}`;
+		const signature = crypto
+			.createHmac('sha256', WOWZA_API_KEY)
+			.update(HMACData)
+			.digest('hex');
+
+		return {
+			'wsc-access-key': WOWZA_ACCESS_KEY,
+			'wsc-timestamp': timestamp,
+			'wsc-signature': signature,
+			'Content-Type': 'application/json',
+		};
 	}
 }
 
