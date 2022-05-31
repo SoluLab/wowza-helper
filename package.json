@@ -11,6 +11,11 @@
 		"wowza",
 		"wowza-helper"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SoluLab/wowza-helper.git"
+	},
+	"homepage": "https://github.com/SoluLab/wowza-helper#readme",
 	"author": "MD ASIF JAWED",
 	"license": "ISC",
 	"devDependencies": {
