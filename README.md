@@ -8,7 +8,6 @@
 
     $ npm install --save wowza-helper
 
-
 ## Startup
 ---
 
