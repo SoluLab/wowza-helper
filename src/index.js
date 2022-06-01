@@ -15,7 +15,7 @@ const WOWZA_ENDPOINTS = {
 
 class WowzaHelper {
 	constructor(WOWZA_API_KEY, WOWZA_ACCESS_KEY) {
-		this.CreateLiveStream = async function (options = {}) {
+		this.CreateLiveStream = async function (streamOptions) {
 			try {
 				const path = WOWZA_ENDPOINTS.CreateLiveStream;
 				const headers = this.GetHeaders(
@@ -30,7 +30,7 @@ class WowzaHelper {
 					aspect_ratio_width = 1280,
 					broadcast_location = 'us_west_california',
 					recording = true,
-				} = options;
+				} = streamOptions;
 
 				const request = await axios.post(
 					WOWZA_BASE_URL + path,
@@ -55,7 +55,7 @@ class WowzaHelper {
 			}
 		};
 
-		this.UpdateLiveStream = async function (options = {}) {
+		this.UpdateLiveStream = async function (updateOptions) {
 			try {
 				const path = WOWZA_ENDPOINTS.CreateLiveStream;
 				const headers = this.GetHeaders(
@@ -64,14 +64,14 @@ class WowzaHelper {
 					WOWZA_ACCESS_KEY
 				);
 
-				if (!Object.keys(options).length) {
+				if (!Object.keys(updateOptions).length) {
 					throw 'No data provided to update!';
 				}
 
 				const request = await axios.post(
 					WOWZA_BASE_URL + path,
 					{
-						live_stream: options,
+						live_stream: updateOptions,
 					},
 					{ headers }
 				);
