@@ -1,10 +1,11 @@
 {
 	"name": "wowza-helper",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"description": "helper package for wowza streaming",
 	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "npm run remove && babel src -d dist",
+		"build": "npm run remove && babel src -d dist --copy-files",
 		"remove": "rimraf dist"
 	},
 	"keywords": [
