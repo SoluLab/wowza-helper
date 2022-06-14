@@ -38,6 +38,14 @@ const wowzaHelper = new Wowza('WOWZA_API_KEY', 'WOWZA_ACCESS_KEY');
 ```js
 // It returns the stream data
 // it returns promise so resolve it
+// streamOptions contains ---
+{
+    name?: string; // Default name would be a random string 
+    aspect_ratio_height?: number; // Default would be 720
+    aspect_ratio_width?: number; // Default would be 1280
+    broadcast_location?: string; // Default would be 'us_west_california'
+    recording?: boolean; // Default would be true
+}
 
 const streamData = await wowzaHelper.CreateLiveStream(streamOptions);
 
@@ -48,6 +56,8 @@ const streamData = await wowzaHelper.CreateLiveStream(streamOptions);
 ```js
 // It returns the updated stream data
 // it returns promise so resolve it
+// updateOptions is same as streamOptions
+// Just pass the balue you want to update
 
 const streamData = await wowzaHelper.UpdateLiveStream(updateOptions);
 
