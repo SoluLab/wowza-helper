@@ -1,9 +1,16 @@
+declare interface StreamOptions {
+	name?: string;
+	aspect_ratio_height?: number;
+	aspect_ratio_width?: number;
+	broadcast_location?: string;
+	recording?: boolean;
+}
 declare class WowzaHelper {
 	constructor(WOWZA_API_KEY: string, WOWZA_ACCESS_KEY: string);
 
-	CreateLiveStream(streamOptions: any): Promise<any>;
+	CreateLiveStream(streamOptions: StreamOptions): Promise<any>;
 
-	UpdateLiveStream(updateOptions: any): Promise<any>;
+	UpdateLiveStream(updateOptions: StreamOptions): Promise<any>;
 
 	GetAllLiveStream(): Promise<any>;
 
